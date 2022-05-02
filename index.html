@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript">
+        function zjisti(radiobutton) {
+            var vysledek = -1;
+            for (i = 0; i < radiobutton.length; i++)
+                if (radiobutton[i].checked) vysledek = i;
+            return vysledek;
+        }
+
+        function pocitej() {
+            napoj = zjisti(document.forms[0].jidlo);
+            switch (napoj) {
+                case 0:
+                    cena = 60 + napoj + zjisti(document.forms[0].sul) + zjisti(document.forms[0].pepr);
+                    break;
+                case 1:
+                    cena = 40 + napoj + zjisti(document.forms[0].sul)+ zjisti(document.forms[0].pepr);
+                    break;
+                case 2:
+                    cena = 40 + napoj + zjisti(document.forms[0].sul)+ zjisti(document.forms[0].pepr);
+                    // cena = 7 + napoj + zjisti(document.forms[0].cukr);
+                    break;
+                case 3:
+                    cena = 10 + zjisti(document.forms[0].sul) / 2;
+                    break;
+                case 4:
+                    cena = 7 + napoj + zjisti(document.forms[0].cukr);
+                     // cena = 6 + napoj + (document.forms[0].rum.checked ? 5 : 1);
+                    break;
+                default:
+                    alert("Nic jste nevybrali");
+                    break;
+            }
+            alert(cena);
+        }
+
+        function povol(co) {
+            var i;
+            for (i = 0; i < document.forms[0].cukr.length; i++)
+                document.forms[0].cukr[i].disabled = (co != 0);
+
+            for (i = 0; i < document.forms[0].sul.length; i++) {
+                document.forms[0].sul[i].disabled = (co != 1);
+            }
+                document.forms[0].pepr[0].disabled = (co != 1);
+        }
+    </script>
+</head>
+<body>
+
+<form  onsubmit="pocitej(); <!--return false;-->">
+    <table border="1" style="border-color: seagreen;">
+        <th style="background: #ffb9eb" colspan="2">Objednani</th>
+        <tr>
+            <td style="background: #ffdbcd"> Lagman
+            <td style="background: #b5ffbd"><input type="radio" name="jidlo" onclick="povol(1);">
+        </tr>
+
+        <tr>
+            <td style="background: #ffdbcd"> Pelmeni
+            <td style="background: #b5ffbd"><input type="radio" name="jidlo" onclick="povol(1);">
+        </tr>
+
+        <tr>
+            <td style="background: #ffdbcd">Borsc
+            <td style="background: #b5ffbd"><input type="radio" name="jidlo" onclick="povol(1);">
+        </tr>
+
+        <tr>
+            <td style="background: #ffdbcd">Polevka
+            <td style="background: #b5ffbd"><input type="radio" name="jidlo" onclick="povol(1);">
+        </tr>
+
+        <tr>
+            <td style="background: #ffdbcd">Caj
+            <td style="background: #b5ffbd"><input type="radio" name="jidlo" onclick="povol(0);">
+        </tr>
+        <tr>
+            <th style="background: #bbe1ff" colspan="2">Prisady</th>
+        </tr>
+        <tr>
+            <td style="background: #ffb184">Cukr
+            <td style="background: #f1ffc5"><input type="radio" name="cukr" disabled>
+                <input type="radio" name="cukr" disabled>
+                <input type="radio" name="cukr" disabled>
+                <input type="radio" name="cukr" disabled>
+                <input type="radio" name="cukr" disabled>
+        <tr>
+            <td style="background: #96ffe6">Sul
+            <td style="background: #f1ffc5"><input type="radio" name="sul" disabled>
+                <input type="radio" name="sul" disabled>
+                <input type="radio" name="sul" disabled>
+                <input type="radio" name="sul" disabled>
+                <input type="radio" name="sul" disabled>
+        <tr>
+            <td style="background: #ffb9eb">Rum
+            <td style="background: #fde3ff">
+        <input type="checkbox" name="pepr" disabled>
+        <input type="checkbox" name="pepr" disabled>
+        </tr>
+    </table>
+    <input style="width: 187px;height: 30px;background: #03e503; border: 1px solid #7f4d4e;" type="submit" value="Pocitej!">
+</form>
+</body>
+</html>
